@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lyrics Overlay — Spotify-style lyrics for YouTube Music</title>
+  <script
+    src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.0/dist/index.global.js"
+    integrity="sha384-nWTzRTCY/9V4Bo352ehygr1c4cnst4XN6lMR3fipakEQrhVpc0hEM5Dii3Amz0sT"
+    crossorigin="anonymous"
+  ></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+    @theme {
+      --color-brand: #FF2323;
+      --color-bg: #050505;
+      --color-surface: #101113;
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #A0A0A0;
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-dvh antialiased bg-[#050505] text-white font-sans selection:bg-[#FF2323]/30 selection:text-white">
+
+  <!-- ambient background glow -->
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grain"></div>
+  </div>
+
+  <!-- ============ NAV ============ -->
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav id="nav" class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="nav-inner mt-4 flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3">
+        <a href="#top" class="flex items-center gap-2.5 group">
+          <span class="logo-mark grid place-items-center h-9 w-9 rounded-xl text-white shrink-0">
+            <img src="/public/yt-lyrics-logo.webp" alt="logo">
+          </span>
+          <span class="font-semibold tracking-tight text-[15px]">Lyrics Overlay</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-[13px] text-[#A0A0A0]">
+          <a href="#features" class="hover:text-white transition-colors">Features</a>
+          <a href="#experience" class="hover:text-white transition-colors">Experience</a>
+          <a href="#how" class="hover:text-white transition-colors">How it works</a>
+        </div>
+        <a href="#install" class="btn-primary text-[13px] px-4 py-2">Install Extension</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="relative px-5 sm:px-8 pt-36 sm:pt-64 pb-16 sm:pb-24">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-4xl mx-auto reveal">
+          <span class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-1.5 text-[12px] text-[#A0A0A0] backdrop-blur">
+            <span class="h-1.5 w-1.5 rounded-full bg-[#FF2323] shadow-[0_0_10px_#FF2323]"></span>
+            Now available for Chrome
+          </span>
+          <h1 class="mt-7 text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-[-0.03em] leading-[1.02]">
+            Bring Spotify-style lyrics<br class="hidden sm:block"> to <span class="text-gradient-red">YouTube Music.</span>
+          </h1>
+          <p class="mt-6 text-base sm:text-lg text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
+            Read synchronized lyrics right where your eyes naturally are. Lyrics Overlay displays floating lyrics directly above your videos without interrupting the listening experience.
+          </p>
+          <div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
+            <a href="#install" class="btn-primary w-full sm:w-auto px-6 py-3.5 text-[15px]">
+              <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 5.5 4.5 7.8H7.5L12 7.5Z" opacity="0"/><circle cx="12" cy="12" r="3.4" fill="#fff"/><path d="M12 2a10 10 0 0 0-8.66 5l4.4 7.6A4 4 0 0 1 12 8h9.2A10 10 0 0 0 12 2Z" fill="#fff" opacity=".9"/></svg>
+              Install Extension
+            </a>
+            <a href="#demo" class="btn-ghost w-full sm:w-auto px-6 py-3.5 text-[15px]">
+              <svg viewBox="0 0 24 24" class="h-[16px] w-[16px]" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg>
+              View Demo
+            </a>
+          </div>
+        </div>
+
+        <!-- ===== HERO SHOWCASE ===== -->
+        <div id="demo" class="mt-16 sm:mt-32 grid grid-cols-1 lg:grid-cols-[1.55fr_1fr] gap-6 lg:gap-7 items-stretch reveal">
+
+          <!-- LEFT: YT Music mockup with overlay -->
+          <div class="showcase-frame relative rounded-[26px] overflow-hidden">
+            <div class="player-window relative aspect-[16/10] sm:aspect-video w-full">
+              <!-- album art bg -->
+              <div class="absolute inset-0 player-bg"></div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/55"></div>
+
+              <!-- top chrome -->
+              <div class="absolute top-0 inset-x-0 flex items-center justify-between px-4 sm:px-6 py-3.5">
+                <div class="flex items-center gap-2 text-[12px] text-white/80">
+                  <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="#FF2323"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm-2 14.5v-9l7 4.5-7 4.5Z"/></svg>
+                  <span class="font-medium">YouTube Music</span>
+                </div>
+                <span class="lo-badge inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10.5px] font-medium">
+                  <span class="h-1.5 w-1.5 rounded-full bg-[#FF2323]"></span> Overlay on
+                </span>
+              </div>
+
+              <!-- floating lyrics overlay -->
+              <div id="overlay" class="lyrics-overlay absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[88%] sm:w-[78%]">
+                <div id="lyricLines" class="flex flex-col items-center gap-2.5 sm:gap-3.5 text-center"></div>
+              </div>
+
+              <!-- bottom player bar -->
+              <div class="absolute bottom-0 inset-x-0 px-4 sm:px-6 pb-4 pt-10 bg-gradient-to-t from-black/90 to-transparent">
+                <div class="flex items-center gap-3">
+                  <div class="h-11 w-11 rounded-lg art-thumb shrink-0"></div>
+                  <div class="min-w-0">
+                    <p class="text-[13px] font-semibold truncate">Midnight City Lights</p>
+                    <p class="text-[11px] text-white/55 truncate">Neon Avenue</p>
+                  </div>
+                  <div class="ml-auto flex items-center gap-4 text-white/80">
+                    <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="currentColor"><path d="M6 6h2v12H6zM10 12l9-6v12z"/></svg>
+                    <span class="grid place-items-center h-9 w-9 rounded-full bg-white text-black"><svg viewBox="0 0 24 24" class="h-[16px] w-[16px]" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg></span>
+                    <svg viewBox="0 0 24 24" class="h-[18px] w-[18px]" fill="currentColor"><path d="M16 6h2v12h-2zM14 12L5 6v12z"/></svg>
+                  </div>
+                </div>
+                <div class="mt-3 flex items-center gap-2 text-[10px] text-white/45">
+                  <span>1:24</span>
+                  <div class="relative h-1 flex-1 rounded-full bg-white/15 overflow-hidden">
+                    <div id="progressBar" class="absolute inset-y-0 left-0 bg-[#FF2323] rounded-full" style="width:42%"></div>
+                  </div>
+                  <span>3:18</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: extension popup -->
+          <div class="flex justify-center lg:justify-end">
+            <div class="popup w-full max-w-[330px] rounded-[22px] overflow-hidden">
+              <!-- header -->
+              <div class="popup-header relative px-4 pt-4 pb-4 flex items-center gap-3">
+                <span class="grid place-items-center h-11 w-11 shrink-0">
+                  <img src="/public/yt-lyrics-logo.webp" alt="logo">
+                </span>
+                <div class="leading-tight">
+                  <p class="font-bold text-[15px] text-white">Lyrics Overlay</p>
+                  <p class="text-[11.5px] text-white/85">Synced lyrics over YouTube Music</p>
+                </div>
+              </div>
+
+              <div class="p-3.5 space-y-3">
+                <!-- enable overlay -->
+                <div class="popup-card flex items-center justify-between px-4 py-3.5">
+                  <div>
+                    <p class="text-[13.5px] font-semibold">Enable overlay</p>
+                    <p class="text-[11.5px] text-[#A0A0A0]">Show synced lyrics over the video</p>
+                  </div>
+                  <button id="overlayToggle" role="switch" aria-checked="true" class="toggle is-on shrink-0">
+                    <span class="toggle-knob"></span>
+                  </button>
+                </div>
+
+                <!-- font size -->
+                <div class="popup-card px-4 py-3.5">
+                  <div class="flex items-start justify-between">
+                    <div>
+                      <p class="text-[13.5px] font-semibold">Font size</p>
+                      <p class="text-[11.5px] text-[#A0A0A0]">Adjust lyric line size</p>
+                    </div>
+                    <p class="text-[#FF2323] font-bold text-[15px] leading-none"><span id="fontVal">30</span><span class="text-[11px] text-[#A0A0A0] font-medium ml-0.5">px</span></p>
+                  </div>
+                  <div class="mt-3 grid grid-cols-4 gap-2" id="sizeBtns">
+                    <button data-size="20" class="size-btn">S</button>
+                    <button data-size="26" class="size-btn">M</button>
+                    <button data-size="30" class="size-btn is-active">L</button>
+                    <button data-size="38" class="size-btn">XL</button>
+                  </div>
+                  <input id="fontSlider" type="range" min="16" max="44" value="30" class="lo-slider mt-3.5 w-full">
+                  <div class="preview-card mt-3.5 grid place-items-center rounded-xl py-5">
+                    <span id="previewText" class="font-extrabold text-white" style="font-size:30px">Lyrics preview</span>
+                  </div>
+                </div>
+
+                <!-- feedback -->
+                <div class="popup-card flex items-center justify-between px-4 py-3.5">
+                  <div>
+                    <p class="text-[13.5px] font-semibold">Send feedback</p>
+                    <p class="text-[11.5px] text-[#A0A0A0]">Tell us what to improve</p>
+                  </div>
+                  <button type="button" onclick="document.getElementById('feedback').scrollIntoView({behavior:'smooth'})" class="open-btn">
+                    <svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+                    Open
+                  </button>
+                </div>
+
+                <p class="text-center text-[11px] text-[#A0A0A0] pt-1">v1.0.0 • Powered by LRCLIB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section id="features" class="px-5 sm:px-8 py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="max-w-2xl reveal">
+          <p class="eyebrow">Features</p>
+          <h2 class="mt-3 text-3xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-tight">Everything you need,<br>nothing you don't.</h2>
+        </div>
+
+        <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 auto-rows-[230px]">
+          <!-- big -->
+          <article class="feature-card lg:col-span-2 lg:row-span-2 reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+            <div class="mt-auto">
+              <h3 class="text-2xl sm:text-3xl font-bold tracking-tight">Synchronized Lyrics</h3>
+              <p class="mt-3 text-[#A0A0A0] text-[16px] sm:text-[17px] leading-relaxed max-w-md">Timestamped lyrics synchronized perfectly with playback, so every line lights up exactly when it's sung.</p>
+              <div class="mt-6 space-y-2 max-w-sm">
+                <div class="sync-line opacity-40">When the city lights start to fade</div>
+                <div class="sync-line active">Driving down the avenue tonight</div>
+                <div class="sync-line opacity-40">Every neon sign feels like home</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><rect x="3" y="5" width="18" height="14" rx="2.5"/><rect x="7" y="9" width="10" height="3" rx="1.5" fill="#FF2323" stroke="none"/></svg></div>
+            <div class="mt-auto"><h3 class="text-xl font-bold tracking-tight">Floating Overlay</h3><p class="mt-2 text-[#A0A0A0] text-[15px] leading-relaxed">Lyrics stay directly over the video.</p></div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><rect x="3" y="8" width="18" height="8" rx="4"/><circle cx="16" cy="12" r="2.5" fill="#FF2323" stroke="none"/></svg></div>
+            <div class="mt-auto"><h3 class="text-xl font-bold tracking-tight">One-click Toggle</h3><p class="mt-2 text-[#A0A0A0] text-[15px] leading-relaxed">Enable or disable instantly.</p></div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M4 7h16M4 12h10M4 17h7"/></svg></div>
+            <div class="mt-auto"><h3 class="text-xl font-bold tracking-tight">Adjustable Font Size</h3><p class="mt-2 text-[#A0A0A0] text-[15px] leading-relaxed">Customize lyric readability.</p></div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+            <div class="mt-auto"><h3 class="text-xl font-bold tracking-tight">Lightweight</h3><p class="mt-2 text-[#A0A0A0] text-[15px] leading-relaxed">Minimal performance impact.</p></div>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="fc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#FF2323" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-7 w-7"><path d="M12 21s-7-4.35-9.5-8.5C.5 9 2.5 5.5 6 5.5c2 0 3.2 1 4 2 .8-1 2-2 4-2 3.5 0 5.5 3.5 3.5 7C19 16.65 12 21 12 21Z"/></svg></div>
+            <div class="mt-auto"><h3 class="text-xl font-bold tracking-tight">Powered by LRCLIB</h3><p class="mt-2 text-[#A0A0A0] text-[15px] leading-relaxed">Community-maintained synced lyrics.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="px-5 sm:px-8 py-20 sm:py-28">
+      <div class="mx-auto max-w-5xl text-center reveal">
+        <h2 class="text-4xl sm:text-6xl font-extrabold tracking-[-0.035em]">Made for <span class="text-gradient-red">listeners.</span></h2>
+        <p class="mt-6 text-base sm:text-lg text-[#A0A0A0] max-w-2xl mx-auto leading-relaxed">
+          Lyrics Overlay was created for people who enjoy watching music videos without constantly looking away. The experience feels natural, immersive, and stays out of the way.
+        </p>
+      </div>
+
+      <div class="mx-auto max-w-6xl mt-14 reveal">
+        <div class="showcase-frame relative rounded-[28px] overflow-hidden">
+          <div class="player-window relative aspect-[16/9] w-full">
+            <div class="absolute inset-0 player-bg-2"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40"></div>
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] text-center">
+              <div class="lyrics-overlay-static">
+                <p class="text-white/35 text-base sm:text-xl font-semibold mb-3">I've been chasing all these city lights</p>
+                <p class="text-white text-2xl sm:text-4xl font-extrabold mb-3 drop-shadow-[0_2px_20px_rgba(255,35,35,0.25)]">Holding on to everything we are</p>
+                <p class="text-white/35 text-base sm:text-xl font-semibold">Underneath the glow of midnight skies</p>
+              </div>
+            </div>
+            <div class="absolute bottom-0 inset-x-0 px-6 pb-5 pt-12 bg-gradient-to-t from-black/90 to-transparent">
+              <div class="flex items-center gap-3">
+                <div class="h-10 w-10 rounded-lg art-thumb"></div>
+                <div><p class="text-[13px] font-semibold">Midnight City Lights</p><p class="text-[11px] text-white/55">Neon Avenue</p></div>
+                <div class="ml-auto h-8 w-8 grid place-items-center rounded-full bg-white text-black"><svg viewBox="0 0 24 24" class="h-3.5 w-3.5" fill="currentColor"><path d="M8 5v14l11-7L8 5Z"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ HOW IT WORKS ============ -->
+    <section id="how" class="px-5 sm:px-8 py-20 sm:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center max-w-2xl mx-auto reveal">
+          <p class="eyebrow">How it works</p>
+          <h2 class="mt-3 text-3xl sm:text-5xl font-extrabold tracking-[-0.03em]">Up and running in seconds.</h2>
+        </div>
+        <div class="mt-14 grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          <div class="step-card reveal">
+            <span class="step-num">01</span>
+            <div class="step-ico"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M10 9v6l5-3-5-3Z" fill="#fff"/></svg></div>
+            <h3 class="mt-5 text-lg font-bold">Play any song</h3>
+            <p class="mt-2 text-[#A0A0A0] text-[14px] leading-relaxed">Play any song on YouTube Music as you normally would.</p>
+          </div>
+          <div class="step-card reveal">
+            <span class="step-num">02</span>
+            <div class="step-ico"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></div>
+            <h3 class="mt-5 text-lg font-bold">Auto-synced</h3>
+            <p class="mt-2 text-[#A0A0A0] text-[14px] leading-relaxed">Lyrics are automatically fetched and synchronized to playback.</p>
+          </div>
+          <div class="step-card reveal">
+            <span class="step-num">03</span>
+            <div class="step-ico"><svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5A2.5 2.5 0 0 1 6.5 4h11A2.5 2.5 0 0 1 20 6.5v7A2.5 2.5 0 0 1 17.5 16H11l-4 4v-4H6.5A2.5 2.5 0 0 1 4 13.5v-7Z"/></svg></div>
+            <h3 class="mt-5 text-lg font-bold">Enjoy</h3>
+            <p class="mt-2 text-[#A0A0A0] text-[14px] leading-relaxed">Enjoy floating lyrics without ever leaving the player.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEEDBACK ============ -->
+    <section id="feedback" class="px-5 sm:px-8 py-20 sm:py-28">
+      <div class="mx-auto max-w-3xl">
+        <div class="feedback-card relative rounded-[28px] px-6 sm:px-10 py-10 sm:py-12 overflow-hidden">
+          <div class="absolute -top-24 right-0 h-72 w-72 rounded-full blur-3xl pointer-events-none" style="background:radial-gradient(circle,rgba(255,35,35,.18),transparent 65%)"></div>
+          <div class="relative text-center reveal">
+            <p class="eyebrow">Send feedback</p>
+            <h2 class="mt-3 text-3xl sm:text-4xl font-extrabold tracking-[-0.03em]">Tell us what to improve.</h2>
+            <p class="mt-3 text-[#A0A0A0] text-[15px] max-w-md mx-auto leading-relaxed">Found a bug, missing a feature, or just have an idea? Drop us a line — we read every message.</p>
+          </div>
+
+          <form id="feedbackForm" class="relative mt-9 space-y-4 reveal" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="fb-label" for="fbName">Name</label>
+                <input id="fbName" name="name" type="text" required placeholder="Your name" class="fb-input">
+              </div>
+              <div>
+                <label class="fb-label" for="fbEmail">Email</label>
+                <input id="fbEmail" name="email" type="email" required placeholder="you@email.com" class="fb-input">
+              </div>
+            </div>
+            <div>
+              <label class="fb-label" for="fbTopic">Topic</label>
+              <div class="grid grid-cols-3 gap-2" id="fbTopics">
+                <button type="button" data-topic="Bug report" class="fb-topic is-active">Bug report</button>
+                <button type="button" data-topic="Feature idea" class="fb-topic">Feature idea</button>
+                <button type="button" data-topic="General" class="fb-topic">General</button>
+              </div>
+            </div>
+            <div>
+              <label class="fb-label" for="fbMessage">Message</label>
+              <textarea id="fbMessage" name="message" rows="4" required placeholder="What's on your mind?" class="fb-input resize-none"></textarea>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-3 pt-1">
+              <button type="submit" class="btn-primary w-full sm:w-auto px-6 py-3.5 text-[15px]">
+                <svg viewBox="0 0 24 24" class="h-[17px] w-[17px]" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4 20-7Z"/></svg>
+                Send feedback
+              </button>
+              <p id="fbStatus" class="text-[13px] text-[#A0A0A0]" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA ============ -->
+    <section id="install" class="px-5 sm:px-8 py-20 sm:py-32">
+      <div class="mx-auto max-w-4xl">
+        <div class="cta-card relative rounded-[32px] px-6 sm:px-12 py-16 sm:py-24 text-center overflow-hidden">
+          <div class="cta-glow"></div>
+          <h2 class="relative text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-[-0.035em] leading-[1.05]">Elevate your YouTube<br>Music experience.</h2>
+          <a href="#" class="relative btn-primary mt-9 inline-flex px-7 py-4 text-base">
+            <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none"><circle cx="12" cy="12" r="3.4" fill="#fff"/><path d="M12 2a10 10 0 0 0-8.66 5l4.4 7.6A4 4 0 0 1 12 8h9.2A10 10 0 0 0 12 2Z" fill="#fff" opacity=".9"/></svg>
+            Install Chrome Extension
+          </a>
+          <p class="relative mt-5 text-[13px] text-[#A0A0A0]">Free • Lightweight • Powered by LRCLIB</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="border-t border-white/[0.06] px-5 sm:px-8 py-10">
+    <div class="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div class="flex items-center gap-2.5">
+        <span class="logo-mark grid place-items-center h-8 w-8 rounded-lg text-white">
+          <img src="/public/yt-lyrics-logo.webp" alt="logo">
+        </span>
+        <span class="text-[13px] text-[#A0A0A0]">© 2026 Lyrics Overlay</span>
+      </div>
+      <div class="flex items-center gap-7 text-[13px] text-[#A0A0A0]">
+        <a href="#" class="hover:text-white transition-colors">GitHub</a>
+        <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+        <a href="#feedback" class="hover:text-white transition-colors">Feedback</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
