@@ -104,7 +104,7 @@ document.addEventListener('visibilitychange', () => {
 });
 
 // ===== Feedback form =====
-const FEEDBACK_EMAIL = "feedback@lyricsoverlay.app"; // change to your real inbox
+const FEEDBACK_EMAIL = "oendnskempat@gmail.com";
 const fbForm = document.getElementById('feedbackForm');
 const fbStatus = document.getElementById('fbStatus');
 const fbTopics = [...document.querySelectorAll('.fb-topic')];
