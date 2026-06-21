@@ -269,3 +269,15 @@ html { scroll-behavior: smooth; }
   box-shadow:0 6px 16px -6px rgba(255,35,35,.55);
 }
 .fb-input.invalid { border-color:#FF2323; box-shadow:0 0 0 3px rgba(255,35,35,.16); }
+
+/* ===== Privacy policy ===== */
+.privacy-card {
+  background: linear-gradient(160deg, #101113, #0a0a0b 70%, #120709);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 40px 100px -40px rgba(0,0,0,.9);
+}
+.policy-section { margin-top: 34px; }
+.policy-section h2 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; }
+.policy-section p { margin-top: 12px; color: #A0A0A0; line-height: 1.75; }
+.policy-section a { color: #fff; text-decoration: underline; text-decoration-color: rgba(255,35,35,.65); text-underline-offset: 4px; }
+.policy-section a:hover { color: #FF6b6b; }

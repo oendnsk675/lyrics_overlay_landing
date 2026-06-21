@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy - Lyrics Overlay</title>
+  <meta name="description" content="Privacy Policy for Lyrics Overlay, a Chrome extension that displays synchronized lyrics on YouTube Music.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#050505">
+  <meta name="color-scheme" content="dark">
+  <link rel="canonical" href="https://lyrics-overlay.vercel.app/privacy-policy.html">
+  <link rel="icon" href="/public/yt-lyrics-logo.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script
+    src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4.3.0/dist/index.global.js"
+    integrity="sha384-nWTzRTCY/9V4Bo352ehygr1c4cnst4XN6lMR3fipakEQrhVpc0hEM5Dii3Amz0sT"
+    crossorigin="anonymous"
+  ></script>
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+    @theme {
+      --color-brand: #FF2323;
+      --color-bg: #050505;
+      --color-surface: #101113;
+      --color-text-primary: #FFFFFF;
+      --color-text-secondary: #A0A0A0;
+      --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+    }
+  </style>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-dvh antialiased bg-[#050505] text-white font-sans selection:bg-[#FF2323]/30 selection:text-white">
+  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grain"></div>
+  </div>
+
+  <header class="fixed top-0 inset-x-0 z-50">
+    <nav class="mx-auto max-w-7xl px-5 sm:px-8">
+      <div class="nav-inner mt-4 flex items-center justify-between rounded-2xl px-4 sm:px-5 py-3">
+        <a href="/" class="flex items-center gap-2.5 group">
+          <span class="logo-mark grid place-items-center h-9 w-9 rounded-xl text-white shrink-0">
+            <img src="/public/yt-lyrics-logo.webp" alt="Lyrics Overlay logo">
+          </span>
+          <span class="font-semibold tracking-tight text-[15px]">Lyrics Overlay</span>
+        </a>
+        <a href="/" class="btn-ghost text-[13px] px-4 py-2">Back to Home</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="px-5 sm:px-8 pt-36 sm:pt-44 pb-20">
+    <article class="mx-auto max-w-5xl privacy-card rounded-[28px] px-6 sm:px-10 py-10 sm:py-12">
+      <p class="eyebrow">Privacy Policy</p>
+      <h1 class="mt-3 text-4xl sm:text-5xl font-extrabold tracking-[-0.03em] leading-tight">Lyrics Overlay Privacy Policy</h1>
+      <p class="mt-5 text-[#A0A0A0] text-base leading-relaxed">Last updated: June 21, 2026</p>
+      <p class="mt-6 text-[#A0A0A0] text-base leading-relaxed">Lyrics Overlay is a Chrome extension that displays synchronized lyrics while you use YouTube Music. This policy explains what information the extension handles and how it is used.</p>
+
+      <section class="policy-section">
+        <h2>Information We Collect</h2>
+        <p>Lyrics Overlay does not collect, sell, rent, or share personal information. The extension is designed to run locally in your browser and only uses the minimum information needed to display lyrics.</p>
+        <p>When you play music on YouTube Music, the extension may read the currently visible song information, such as title and artist, to request matching synchronized lyrics.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>How Information Is Used</h2>
+        <p>Song information is used only to find and display lyrics for the track you are currently playing. Lyrics Overlay does not use this information for advertising, profiling, analytics, or tracking.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Third-Party Services</h2>
+        <p>Lyrics Overlay uses LRCLIB to retrieve synchronized lyrics. When lyrics are requested, song details may be sent to LRCLIB so it can return matching lyrics. LRCLIB's handling of requests is governed by its own policies and service behavior.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Local Storage</h2>
+        <p>The extension may store settings locally in your browser, such as whether the overlay is enabled and your preferred font size. These settings remain on your device and are not sent to us.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Feedback</h2>
+        <p>If you choose to send feedback by email, we receive the information you include in that message, such as your name, email address, topic, and message. We use this only to respond to feedback and improve the extension.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Data Sharing</h2>
+        <p>We do not sell or share user data with advertisers, data brokers, or other third parties. We do not use your data for creditworthiness, lending, or any unrelated purpose.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Children's Privacy</h2>
+        <p>Lyrics Overlay is not directed to children under 13. We do not knowingly collect personal information from children.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Changes to This Policy</h2>
+        <p>We may update this Privacy Policy from time to time. Updates will be posted on this page with a revised last updated date.</p>
+      </section>
+
+      <section class="policy-section">
+        <h2>Contact</h2>
+        <p>If you have questions about this Privacy Policy, contact us at <a href="mailto:oendnskempat@gmail.com">oendnskempat@gmail.com</a>.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="border-t border-white/[0.06] px-5 sm:px-8 py-10">
+    <div class="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-5">
+      <div class="flex items-center gap-2.5">
+        <span class="logo-mark grid place-items-center h-8 w-8 rounded-lg text-white">
+          <img src="/public/yt-lyrics-logo.webp" alt="Lyrics Overlay logo">
+        </span>
+        <span class="text-[13px] text-[#A0A0A0]">© 2026 Lyrics Overlay</span>
+      </div>
+      <div class="flex items-center gap-7 text-[13px] text-[#A0A0A0]">
+        <a href="/" class="hover:text-white transition-colors">Home</a>
+        <a href="mailto:oendnskempat@gmail.com" class="hover:text-white transition-colors">Contact</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
